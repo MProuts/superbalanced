@@ -1,23 +1,26 @@
+# BinaryTreeNode
 class BinaryTreeNode
-  def initialize(value)
+  def initialize(value, depth = 0)
     @value = value
     @left  = nil
     @right = nil
+    @depth = depth
   end
 
   def insert_left(value)
-    @left = BinaryTreeNode.new(value)
+    @left = BinaryTreeNode.new(value, @depth + 1)
   end
 
   def insert_right(value)
-    @right = BinaryTreeNode.new(value)
+    @right = BinaryTreeNode.new(value, @depth + 1)
   end
 
   # def leaf?
   # end
 
-  # def depth
-  # end
+  def depth
+    @depth
+  end
 
   def superbalanced?
     if !(@left || @right)
@@ -27,5 +30,3 @@ class BinaryTreeNode
     end
   end
 end
-
-
