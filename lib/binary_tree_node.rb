@@ -20,7 +20,15 @@ class BinaryTreeNode
   end
 
   def leaves
-  
+    if @left.nil? && @right.nil?
+      [self]
+    elsif @left && @right
+      @left.leaves + @right.leaves
+    elsif @left
+      @left.leaves
+    else
+      @right.leaves
+    end
   end
 
   def superbalanced?
