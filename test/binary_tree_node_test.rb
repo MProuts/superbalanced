@@ -77,6 +77,19 @@ class BinaryTreeNodeTest < MiniTest::Test
     assert root.leaves.include?(right)
   end
 
+  def test_three_deep_tree_leaves
+    root = BinaryTreeNode.new(1)
+    left = root.insert_left(2)
+    right = root.insert_right(3)
+    right_left = right.insert_left(4)
+    right_right = right.insert_right(5)
+
+    assert_equal 3, root.leaves.length
+    assert root.leaves.include?(left)
+    assert root.leaves.include?(right_left)
+    assert root.leaves.include?(right_right)
+  end
+
   # ##############
   # superbalanced?
   # ##############
@@ -91,18 +104,27 @@ class BinaryTreeNodeTest < MiniTest::Test
     assert root.superbalanced?
   end
 
-  # def test_just_barely_not_superbalanced
-    # skip
-    # root = BinaryTreeNode.new(1)
-    # root.insert_right(2)
-    # root.insert_left(3).insert_left(4).insert_left(5)
-    # refute root.superbalanced?
-  # end
+  def test_just_barely_not_superbalanced
+    root = BinaryTreeNode.new(1)
+    root.insert_right(2)
+    root.insert_left(3).insert_left(4).insert_left(5)
+    refute root.superbalanced?
+  end
 
   def test_one_generation_superbalanced
     root = BinaryTreeNode.new(1)
     root.insert_right(2)
     root.insert_left(3)
+    assert root.superbalanced?
+  end
+
+  def test_three_generation_superbalanced
+    root = BinaryTreeNode.new(1)
+    left = root.insert_left(2)
+    right = root.insert_right(3)
+    right_left = right.insert_left(4)
+    right_right = right.insert_right(5)
+
     assert root.superbalanced?
   end
 end

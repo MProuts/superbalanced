@@ -32,18 +32,7 @@ class BinaryTreeNode
   end
 
   def superbalanced?
-    if !(@left || @right)
-      true
-    else
-      leaves = []
-      if @left != nil
-        leaves << @left
-      end
-      if @right != nil
-        leaves << @right
-      end
-      depths = leaves.map(&:depth)
-      (depths.max - depths.min) <= 1
-    end
+    depths = leaves.map(&:depth)
+    (depths.max - depths.min) <= 1
   end
 end
