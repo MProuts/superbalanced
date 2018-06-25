@@ -22,12 +22,12 @@ class BinaryTreeNode
   def leaves
     if @left.nil? && @right.nil?
       [self]
+    elsif @left.nil? && @right
+      @right.leaves
+    elsif @left && @right.nil?
+      @left.leaves
     elsif @left && @right
       @left.leaves + @right.leaves
-    elsif @left
-      @left.leaves
-    else
-      @right.leaves
     end
   end
 
